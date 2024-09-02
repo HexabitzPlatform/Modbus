@@ -8,7 +8,6 @@
 USHORT   usRegInputStart = REG_INPUT_START; 
 USHORT   usRegInputBuf[REG_INPUT_NREGS]= { 0 ,0};  
 USHORT   usRegHoldingStart = REG_HOLDING_START;
-//USHORT   usRegHoldingBuf[REG_HOLDING_NREGS]={11,22,33,44,55,66};
 USHORT   usRegHoldingBuf[REG_HOLDING_NREGS];
 
 

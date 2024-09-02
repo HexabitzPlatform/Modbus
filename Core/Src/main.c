@@ -27,6 +27,8 @@
 /* USER CODE BEGIN Includes */
 #include "mb.h"
 #include "mb_API.h"
+#include "port.h"
+#include "mb_slave_API.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,14 +59,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static void MX_NVIC_Init(void);
-void ModbusRTUTask() ;
+
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
+uint16_t qq[10] ;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -93,7 +95,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   MX_NVIC_Init();
-  ModbusRTUTask();
+  MbSlaveMode(MB_RTU,MB_SLAVE_ADDRESS , PORT, BAUD_RATE, MB_PAR_NONE);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -149,23 +151,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-static void MX_NVIC_Init(void)
- {
-
-	/* DMA1_Channel1_IRQn interrupt configuration */
-	NVIC_SetPriority(DMA1_Channel1_IRQn, 1);
-	NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-	/* TIM14_IRQn interrupt configuration */
-	NVIC_SetPriority(TIM14_IRQn, 2);
-	NVIC_EnableIRQ(TIM14_IRQn);
-	/* USART1_IRQn interrupt configuration */
-	NVIC_SetPriority(USART1_IRQn, 3);
-	NVIC_EnableIRQ(USART1_IRQn);
-	/* TIM16_IRQn interrupt configuration */
-	NVIC_SetPriority(TIM16_IRQn, 2);
-	NVIC_EnableIRQ(TIM16_IRQn);
-
-}
 
 /* USER CODE END 4 */
 
