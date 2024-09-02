@@ -59,8 +59,6 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 static void MX_NVIC_Init(void);
 void ModbusRTUTask() ;
-uint8_t ee[50]={1,2,3,4,5,6};
-int i ;
 /* USER CODE END 0 */
 
 /**
@@ -74,8 +72,6 @@ int main(void)
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -104,11 +100,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		/* USER CODE END WHILE */
 
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
+		/* USER CODE BEGIN 3 */
+	}
   /* USER CODE END 3 */
 }
 
