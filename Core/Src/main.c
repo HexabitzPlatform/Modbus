@@ -57,6 +57,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static void MX_NVIC_Init(void);
 void ModbusRTUTask() ;
 uint8_t ee[50]={1,2,3,4,5,6};
 int i ;
@@ -92,47 +93,18 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM14_Init();
-  MX_USART1_UART_Init();
   MX_TIM16_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  MX_GPIO_Init();
-  MX_TIM14_Init();
-  MX_DMA_Init();
-  /* DMA1_Channel1_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel1_IRQn, 1);
-  NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-  /* TIM14_IRQn interrupt configuration */
-  NVIC_SetPriority(TIM14_IRQn, 2);
-  NVIC_EnableIRQ(TIM14_IRQn);
-  /* USART1_IRQn interrupt configuration */
-  NVIC_SetPriority(USART1_IRQn, 3);
-  NVIC_EnableIRQ(USART1_IRQn);
-  /* TIM16_IRQn interrupt configuration */
-  NVIC_SetPriority(TIM16_IRQn, 2);
-  NVIC_EnableIRQ(TIM16_IRQn);
-//  HAL_UART_Init(SERIAL_PORT);
-//  MX_USART1_UART_Init();
-  LL_TIM_EnableIT_UPDATE(TIM16);
-  LL_TIM_EnableCounter(TIM16);
+  MX_NVIC_Init();
   ModbusRTUTask();
-
-  setZeroReached(0);
-  HAL_Delay(100);
-  setZeroReached(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  usRegHoldingBuf[0]=9;
-//	  usRegHoldingBuf[1]=59;
-//	  usRegHoldingBuf[2]=48;
-//	  usRegHoldingBuf[3]=24;
-//	  usRegHoldingBuf[4]=30;
-//	  eMBRegHoldingCB(ee, 1, 6, MB_REG_WRITE);
-	  i++ ;
-//	  HAL_UART_Receive(&huart1, ee, 20, 0xffff);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -182,6 +154,23 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+static void MX_NVIC_Init(void)
+ {
+
+	/* DMA1_Channel1_IRQn interrupt configuration */
+	NVIC_SetPriority(DMA1_Channel1_IRQn, 1);
+	NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+	/* TIM14_IRQn interrupt configuration */
+	NVIC_SetPriority(TIM14_IRQn, 2);
+	NVIC_EnableIRQ(TIM14_IRQn);
+	/* USART1_IRQn interrupt configuration */
+	NVIC_SetPriority(USART1_IRQn, 3);
+	NVIC_EnableIRQ(USART1_IRQn);
+	/* TIM16_IRQn interrupt configuration */
+	NVIC_SetPriority(TIM16_IRQn, 2);
+	NVIC_EnableIRQ(TIM16_IRQn);
+
+}
 
 /* USER CODE END 4 */
 

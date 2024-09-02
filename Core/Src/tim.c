@@ -44,8 +44,6 @@ void MX_TIM14_Init(void)
 	  __HAL_RCC_TIM14_CLK_ENABLE();
 
 	  /* TIM14 interrupt Init */
-//	  HAL_NVIC_SetPriority(TIM14_IRQn, 0, 0);
-//	  HAL_NVIC_EnableIRQ(TIM14_IRQn);
 
 	  /* Configure the global features of the TIM14 */
 	  htim14.Instance = TIM14;
@@ -75,16 +73,6 @@ void MX_TIM14_Init(void)
 	    Error_Handler();
 	  }
 
-//  htim14.Instance = TIM14;
-//  htim14.Init.Prescaler = 2399;
-//  htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
-//  htim14.Init.Period = 0;
-//  htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-//  htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-//  if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
   /* USER CODE BEGIN TIM14_Init 2 */
 
   /* USER CODE END TIM14_Init 2 */
@@ -112,24 +100,9 @@ void MX_TIM16_Init(void)
   {
     Error_Handler();
   }
-//	 TIM_HandleTypeDef htim16;
-//
-//	  /* Peripheral clock enable */
-//	  __HAL_RCC_TIM16_CLK_ENABLE();
-//
-//	  htim16.Instance = TIM16;
-//	  htim16.Init.Prescaler = 47;
-//	  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-//	  htim16.Init.Period = 1999;
-//	  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-//	  htim16.Init.RepetitionCounter = 0;
-//
-//	  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
-//	  {
-//	    Error_Handler();
-//	  }
 
-//	  HAL_TIM_MspInit(&htim16);
+  LL_TIM_EnableIT_UPDATE(TIM16);
+  LL_TIM_EnableCounter(TIM16);
   /* USER CODE BEGIN TIM16_Init 2 */
 
   /* USER CODE END TIM16_Init 2 */
