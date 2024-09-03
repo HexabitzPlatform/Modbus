@@ -8,6 +8,8 @@ PR_BEGIN_EXTERN_C
 
 #include "port.h"
 
+#define PORT             3
+#define BAUD_RATE        9600
 #define MB_SLAVE_ADDRESS 1
 
 /*      NOT USED        */

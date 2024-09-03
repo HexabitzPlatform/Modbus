@@ -28,6 +28,7 @@ eMBErrorCode MbSlaveMode(eMBMode eMode, UCHAR Slave_Address, UCHAR Port,ULONG Ba
 
 	eMBErrorCode eStatus = eMBInit(eMode, Slave_Address, Port, Baud_Rate,Parity);
 	eStatus = eMBEnable();
+
 }
 
 void Write(USHORT *Buffer, uint8_t startAdd, uint8_t endAdd) {
