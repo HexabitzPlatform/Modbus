@@ -35,8 +35,7 @@
 #define __MB_EEPROM_H
 
 /* Includes ------------------------------------------------------------------*/
-#include <H1DR1_Slave.h>
-
+#include "main.h"
 /* Memory map: - STM32F091CB
 				- Application: 0x08000000 - 0x0801D7FF >> 118 KB
 		 - Read-only (RO): 0x0801D800 - 0x0801DFFF >> 2 KB, used to store topology information and Command Snippets

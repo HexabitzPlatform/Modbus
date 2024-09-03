@@ -31,6 +31,4 @@ Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0 \
 Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang \
 Modbus_Master_Mode/H1DR1/Src \
 Modbus_Master_Mode/Modbus_Master/Src \
-Modbus_Slave_Mode/H1DR1/Src \
-Modbus_Slave_Mode/Modbus_Slave/Scr \
 

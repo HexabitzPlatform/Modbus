@@ -9,8 +9,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Modbus_Slave_Mode/Modbus_Slave/Scr/subdir.mk
--include Modbus_Slave_Mode/H1DR1/Src/subdir.mk
 -include Modbus_Master_Mode/Modbus_Master/Src/subdir.mk
 -include Modbus_Master_Mode/H1DR1/Src/subdir.mk
 -include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
