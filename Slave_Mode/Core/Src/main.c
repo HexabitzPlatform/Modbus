@@ -93,12 +93,11 @@ int main(void)
   MX_TIM14_Init();
   MX_TIM16_Init();
   MX_USART1_UART_Init();
-  /* USER CODE BEGIN 2 */
-  MX_NVIC_Init();
-  MbSlaveMode(MB_RTU,MB_SLAVE_ADDRESS , PORT, BAUD_RATE, MB_PAR_NONE);
-  /* USER CODE END 2 */
+	/* USER CODE BEGIN 2 */
+	MbSlaveMode(MB_RTU, MB_SLAVE_ADDRESS, PORT, BAUD_RATE, MB_PAR_NONE);
+	/* USER CODE END 2 */
 
-  /* Infinite loop */
+	/* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
