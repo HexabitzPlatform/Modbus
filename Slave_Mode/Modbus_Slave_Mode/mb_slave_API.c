@@ -1,9 +1,16 @@
 /*
- * mb_slave_API.c
- *
- *  Created on: Sep 2, 2024
- *      Author: MAHMOOD_REDA
- */
+* mb_slave_API.c
+* Description   : Source file contains all the functions for the Modbus slave API.
+*  Created on   : Sep 2, 2024
+*      Author   : MAHMOOD_REDA @ Hexabitz
+******************************************************************************
+* @attention
+*
+* Copyright (c) 2024 Hexabitz.
+* All rights reserved.
+*
+******************************************************************************
+*/
 
 /* ----------------------- System includes ----------------------------------*/
 #include "stdlib.h"
@@ -20,7 +27,7 @@ extern USHORT usRegHoldingBuf[REG_HOLDING_NREGS];
 
 void MX_NVIC_Init(void);
 
-/*-----------------------------------------------------------*/
+/********************************************************************/
 /*
  * @brief: Initializes the Modbus slave mode.
  * @param1: eMode - the mode of operation (e.g., RTU, ASCII).
@@ -30,14 +37,14 @@ void MX_NVIC_Init(void);
  * @param5: Parity - the parity setting (e.g., none, even, odd).
  * @retval: eMBErrorCode - status of the initialization process.
  */
-eMBErrorCode MbSlaveMode(eMBMode eMode, UCHAR Slave_Address, UCHAR Port,ULONG Baud_Rate, eMBParity Parity) {
-	MX_NVIC_Init();
-	eMBErrorCode eStatus = eMBInit(eMode, Slave_Address, Port, Baud_Rate,Parity);
-	eStatus = eMBEnable();
-	return eStatus;
+eMBErrorCode MbSlaveMode(eMBMode eMode, UCHAR Slave_Address, UCHAR Port, ULONG Baud_Rate, eMBParity Parity) {
+    MX_NVIC_Init();
+    eMBErrorCode eStatus = eMBInit(eMode, Slave_Address, Port, Baud_Rate, Parity);
+    eStatus = eMBEnable();
+    return eStatus;
 }
 
-/*-----------------------------------------------------------*/
+/********************************************************************/
 /*
  * @brief: Writes data to the Modbus holding register buffer.
  * @param1: Buffer - pointer to a buffer containing the data to be written.
@@ -53,7 +60,8 @@ void WriteToModbusBuffer(USHORT *Buffer, uint16_t RegAdd, uint16_t NofReg) {
         Index++;
     }
 }
-/*-----------------------------------------------------------*/
+
+/********************************************************************/
 /*
  * @brief: Reads data from the Modbus holding register buffer.
  * @param1: Buffer - pointer to a buffer where the read data will be stored.
@@ -69,25 +77,30 @@ void ReadFromModbusBuffer(USHORT *Buffer, uint16_t RegAdd, uint16_t NofReg) {
         Index++;
     }
 }
+
+/********************************************************************/
 /*
  * @brief: Initializes the NVIC (Nested Vectored Interrupt Controller) with specific priorities and enables the interrupts.
  * @param: None
  * @retval: None
  */
-
 void MX_NVIC_Init(void) {
 
-	/* DMA1_Channel1_IRQn interrupt configuration */
-	NVIC_SetPriority(DMA1_Channel1_IRQn, 1);
-	NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-	/* TIM14_IRQn interrupt configuration */
-	NVIC_SetPriority(TIM14_IRQn, 2);
-	NVIC_EnableIRQ(TIM14_IRQn);
-	/* USART1_IRQn interrupt configuration */
-	NVIC_SetPriority(USART1_IRQn, 3);
-	NVIC_EnableIRQ(USART1_IRQn);
-	/* TIM16_IRQn interrupt configuration */
-	NVIC_SetPriority(TIM16_IRQn, 2);
-	NVIC_EnableIRQ(TIM16_IRQn);
+    /* DMA1_Channel1_IRQn interrupt configuration */
+    NVIC_SetPriority(DMA1_Channel1_IRQn, 1);
+    NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 
+    /* TIM14_IRQn interrupt configuration */
+    NVIC_SetPriority(TIM14_IRQn, 2);
+    NVIC_EnableIRQ(TIM14_IRQn);
+
+    /* USART1_IRQn interrupt configuration */
+    NVIC_SetPriority(USART1_IRQn, 3);
+    NVIC_EnableIRQ(USART1_IRQn);
+
+    /* TIM16_IRQn interrupt configuration */
+    NVIC_SetPriority(TIM16_IRQn, 2);
+    NVIC_EnableIRQ(TIM16_IRQn);
 }
+
+/************************ (C) COPYRIGHT Hexabitz *****END OF FILE****/
