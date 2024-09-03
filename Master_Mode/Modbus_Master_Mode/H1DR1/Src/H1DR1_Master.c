@@ -250,124 +250,151 @@ void MessagingTask(void const * argument)
 /* -----------------------------------------------------------------------
 	|																APIs	 																 	|
    ----------------------------------------------------------------------- */
-
-/* --- setup the Modbus mode as RTU
-*/
+/********************************************************************/
+/*
+ * @brief: Sets up the Modbus mode as RTU.
+ * @param1: BaudRate - the baud rate for communication.
+ * @param2: ParityBit - the parity setting (e.g., none, even, odd).
+ * @retval: Module_Status - status of the setup process.
+ */
 Module_Status SetupModbusRTU(uint32_t BaudRate, uint32_t ParityBit)
 {
-	Module_Status Status;
-	ULONG Pbit = (ULONG) ParityBit;
-	ULONG ulBaudRate = (ULONG) BaudRate;
-	  HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	  HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	/* Initialize Modbus port as RTU */
-	if ( MB_ENOERR != eMBMSerialInit( &xMBMaster,  MB_RTU, 1, ulBaudRate, Pbit ) ) {
-		Status = Modbus_ERROR;}
-	else 	
-		Status = Modbus_OK;
-	  HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	  HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
- return Status;	
+    Module_Status Status;
+    ULONG Pbit = (ULONG) ParityBit;
+    ULONG ulBaudRate = (ULONG) BaudRate;
+    HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    /* Initialize Modbus port as RTU */
+    if (MB_ENOERR != eMBMSerialInit(&xMBMaster, MB_RTU, 1, ulBaudRate, Pbit)) {
+        Status = Modbus_ERROR;
+    } else {
+        Status = Modbus_OK;
+    }
+    HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    return Status;
 }
 
-/*-----------------------------------------------------------*/
-
-/* --- setup the Modbus mode as ASCII
-*/
+/********************************************************************/
+/*
+ * @brief: Sets up the Modbus mode as ASCII.
+ * @param1: BaudRate - the baud rate for communication.
+ * @param2: ParityBit - the parity setting (e.g., none, even, odd).
+ * @retval: Module_Status - status of the setup process.
+ */
 Module_Status SetupModbusASCII(uint32_t BaudRate, uint32_t ParityBit)
 {
-	Module_Status Status;
-	ULONG Pbit = (ULONG) ParityBit;
-	ULONG ulBaudRate = (ULONG) BaudRate;
-	  HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	  HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	/* Initialize Modbus port as ASCII */
-	if ( MB_ENOERR != eMBMSerialInit( &xMBMaster,  MB_ASCII, 1, ulBaudRate, Pbit ) ) { 
-		Status = Modbus_ERROR;}
-	else 	
-		Status = Modbus_OK;
-	  HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	  HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	return Status;
+    Module_Status Status;
+    ULONG Pbit = (ULONG) ParityBit;
+    ULONG ulBaudRate = (ULONG) BaudRate;
+    HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    /* Initialize Modbus port as ASCII */
+    if (MB_ENOERR != eMBMSerialInit(&xMBMaster, MB_ASCII, 1, ulBaudRate, Pbit)) {
+        Status = Modbus_ERROR;
+    } else {
+        Status = Modbus_OK;
+    }
+    HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    return Status;
 }
 
-/*-----------------------------------------------------------*/
-
-/* --- read data from a slave on Modbus port FC: 0x03
-*/
-Module_Status ReadModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd, uint8_t NofReg, unsigned short * DataBuffer )
+/********************************************************************/
+/*
+ * @brief: Reads data from a slave on Modbus port using function code 0x03.
+ * @param1: SlaveAdd - the address of the slave device.
+ * @param2: RegAdd - starting address of the register to read from.
+ * @param3: NofReg - number of registers to read.
+ * @param4: DataBuffer - pointer to a buffer where the read data will be stored.
+ * @retval: Module_Status - status of the read process.
+ */
+Module_Status ReadModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd, uint8_t NofReg, unsigned short *DataBuffer)
 {
-	Module_Status Status;
-	unsigned short *Buffer=DataBuffer;
+    Module_Status Status;
+    unsigned short *Buffer = DataBuffer;
 
-	  HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	  HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	if (MB_ENOERR != eMBMReadHoldingRegisters(xMBMaster, SlaveAdd, RegAdd, NofReg, Buffer)) {	
-		Status = Modbus_ERROR;}
-	else {
-		Status = Modbus_OK;
-	}
-	  HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	  HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    if (MB_ENOERR != eMBMReadHoldingRegisters(xMBMaster, SlaveAdd, RegAdd, NofReg, Buffer)) {
+        Status = Modbus_ERROR;
+    } else {
+        Status = Modbus_OK;
+    }
+    HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
 
-	return Status;
+    return Status;
 }
 
-/*-----------------------------------------------------------*/
-
-/* --- write data to a slave on Modbus port FC: 0x06
-*/
+/********************************************************************/
+/*
+ * @brief: Writes data to a slave on Modbus port using function code 0x06.
+ * @param1: SlaveAdd - the address of the slave device.
+ * @param2: RegAdd - starting address of the register to write to.
+ * @param3: Data - the data to be written.
+ * @retval: Module_Status - status of the write process.
+ */
 Module_Status WriteModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd, uint32_t Data)
 {
-	Module_Status Status;
-	  HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	  HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	if (MB_ENOERR != eMBMWriteSingleRegister(xMBMaster, SlaveAdd, RegAdd, Data)) {	
-		Status = Modbus_ERROR;}
-	else {
-		Status = Modbus_OK;
-	}
-	  HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	  HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	return Status;
+    Module_Status Status;
+    HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    if (MB_ENOERR != eMBMWriteSingleRegister(xMBMaster, SlaveAdd, RegAdd, Data)) {
+        Status = Modbus_ERROR;
+    } else {
+        Status = Modbus_OK;
+    }
+    HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    return Status;
 }
-/*-----------------------------------------------------------*/
 
-/* --- write N data bytes to a slave on Modbus port FC: 0x10
-*/
+/********************************************************************/
+/*
+ * @brief: Writes multiple data bytes to a slave on Modbus port using function code 0x10.
+ * @param1: SlaveAdd - the address of the slave device.
+ * @param2: RegAdd - starting address of the register to write to.
+ * @param3: NofReg - number of registers to write.
+ * @param4: Data - pointer to a buffer containing the data to be written.
+ * @retval: Module_Status - status of the write process.
+ */
 Module_Status WriteModbusMultiRegisters(uint8_t SlaveAdd, uint32_t RegAdd, uint8_t NofReg, uint16_t *Data)
 {
-	Module_Status Status;
-	USHORT *InBuffer = (USHORT *)Data;
-	  HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	  HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	if (MB_ENOERR != eMBMWriteMultipleRegisters(xMBMaster, SlaveAdd, RegAdd, NofReg, InBuffer)) {
-		Status = Modbus_ERROR;}
-	else {
-		Status = Modbus_OK;
-	}
-	  HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	  HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	return Status;
+    Module_Status Status;
+    USHORT *InBuffer = (USHORT *)Data;
+    HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    if (MB_ENOERR != eMBMWriteMultipleRegisters(xMBMaster, SlaveAdd, RegAdd, NofReg, InBuffer)) {
+        Status = Modbus_ERROR;
+    } else {
+        Status = Modbus_OK;
+    }
+    HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    return Status;
 }
 
-/*-----------------------------------------------------------*/
-
-/* --- set timeout to a slave on Modbus port
-*/
+/********************************************************************/
+/*
+ * @brief: Sets the timeout for a slave on Modbus port.
+ * @param1: MiliSeconds - the timeout duration in milliseconds.
+ * @retval: Module_Status - status of the timeout setting process.
+ */
 Module_Status SetTimeOut(uint16_t MiliSeconds)
 {
-	Module_Status Status;
-	USHORT timeout = (USHORT) MiliSeconds;
-	  HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	  HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	if (MB_ENOERR != eMBMSetSlaveTimeout( xMBMaster, timeout )) {
-		Status = Modbus_ERROR;}
-	else
-		Status = Modbus_OK;
-	  HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
-	  HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
-	return Status;
+    Module_Status Status;
+    USHORT timeout = (USHORT)MiliSeconds;
+    HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    if (MB_ENOERR != eMBMSetSlaveTimeout(xMBMaster, timeout)) {
+        Status = Modbus_ERROR;
+    } else {
+        Status = Modbus_OK;
+    }
+    HAL_NVIC_EnableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
+    HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+    return Status;
 }
 
 /*-----------------------------------------------------------*/

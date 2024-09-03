@@ -205,9 +205,6 @@ void IND_LED_Init(void);
 
 
 
-
-
-
 /* -----------------------------------------------------------------------
 	|																APIs	 	|
  -----------------------------------------------------------------------
@@ -223,8 +220,6 @@ Module_Status SetTimeOut(uint16_t MiliSeconds);
 Module_Status ModbuserviceRoutine(uint8_t mbMeterID);
 void MasterLoop();
 void SetRTC(uint8_t hour, uint8_t min, uint8_t sec);
-
-//Module_Status SlaveServiceRoutine(uint8_t SlaveAdd , uint32_t RegAdd , uint8_t NofReg);
 /* -----------------------------------------------------------------------
 	|															Commands																 	|
    ----------------------------------------------------------------------- 
