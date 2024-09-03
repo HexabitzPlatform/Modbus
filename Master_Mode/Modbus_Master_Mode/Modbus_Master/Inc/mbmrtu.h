@@ -9,7 +9,6 @@
 #ifndef _MBM_RTU_H
 #define _MBM_RTU_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -60,4 +59,4 @@ eMBMSerialRTUInit( xMBMInternalHandle * pxIntHdl, UCHAR ucPort, ULONG ulBaudRate
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

@@ -10,7 +10,7 @@
 #define _MBS_CONFIG_H
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_SLAVE)
+
 
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
@@ -29,4 +29,4 @@ PR_BEGIN_EXTERN_C
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

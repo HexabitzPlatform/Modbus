@@ -6,7 +6,6 @@
  * $Id: mbportserial.c,v 1.1 2008-04-06 07:46:23 cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 #include <H1DR1_Master.h>
 #include <stdlib.h>
@@ -439,5 +438,5 @@ HAL_UART_Receive_IT(&huart1, &ubUDR,sizeof(ubUDR));
 		
 }
 
-#endif
+
 /************************ (C) MODIFIED BY HEXABITZ *****END OF FILE****/

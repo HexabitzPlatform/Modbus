@@ -10,7 +10,6 @@
 #ifndef _MB_UTILS_H
 #define _MB_UTILS_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -159,6 +158,5 @@ prvCRC16Update( USHORT usCRC, UBYTE ubData );
 
 #ifdef __cplusplus
 PR_END_EXTERN_C
-#endif
 #endif
 #endif

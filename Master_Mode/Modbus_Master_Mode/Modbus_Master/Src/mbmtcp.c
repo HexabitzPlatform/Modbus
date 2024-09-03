@@ -6,7 +6,7 @@
  * $Id: mbmtcp.c,v 1.23 2014-08-23 09:44:21 embedded-solutions.cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #include <stdio.h>
@@ -816,6 +816,5 @@ vMBMLogTCPFrame( eMBPortLogLevel eLevel, xMBMInternalHandle * pxIntHdl, char *sz
     }
     vMBPPortLog( eLevel, MB_LOG_TCP, "[IDX=" MBP_FORMAT_USHORT "] %s%s\n", ( USHORT ) pxFrameHdl->ubIdx, szMsg, arubBuffer );
 }
-#endif
 #endif
 #endif

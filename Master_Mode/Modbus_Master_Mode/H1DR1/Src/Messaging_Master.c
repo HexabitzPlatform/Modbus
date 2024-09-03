@@ -1,7 +1,7 @@
 
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 
 
 
@@ -338,5 +338,5 @@ void CheckTheFlag()
 						}
 
 			  }
-#endif
+
 /*-----------------------------------------------------------*/

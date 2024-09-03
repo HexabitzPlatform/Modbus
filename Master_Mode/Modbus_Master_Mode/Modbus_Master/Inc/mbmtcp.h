@@ -9,7 +9,6 @@
 #ifndef _MBM_TCP_H
 #define _MBM_TCP_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -77,4 +76,4 @@ eMBErrorCode    eMBMTCPFrameDisconnect(  /*@shared@ */ xMBMInternalHandle * pxIn
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

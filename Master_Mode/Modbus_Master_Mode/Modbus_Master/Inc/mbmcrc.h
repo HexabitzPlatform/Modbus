@@ -10,7 +10,6 @@
 #ifndef _MBM_CRC_H
 #define _MBM_CRC_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -48,4 +47,4 @@ USHORT usMBMCRC16( const UBYTE * pucFrame, USHORT usLen );
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

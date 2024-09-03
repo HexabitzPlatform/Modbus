@@ -6,7 +6,7 @@
  * $Id: mbmfuncfiles.c,v 1.1 2011-05-22 22:29:06 embedded-solutions.cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #if defined( __18CXX )
@@ -541,4 +541,4 @@ eMBMWriteFileRecord( xMBHandle xHdl, UCHAR ucSlaveAddress,
     return eStatus;
 }
 #endif
-#endif
+

@@ -6,7 +6,7 @@
  * $Id: mbmudp.c,v 1.3 2011-12-04 20:51:46 embedded-solutions.cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #include <stdio.h>
@@ -650,4 +650,4 @@ vMBMLogUDPFrame( eMBPortLogLevel eLevel, xMBMInternalHandle * pxIntHdl, char *sz
 }
 #endif
 #endif
-#endif
+

@@ -6,7 +6,6 @@
  * $Id: mbmrtu.c,v 1.54 2013-05-21 21:04:12 embedded-solutions.cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #include <string.h>
@@ -1026,4 +1025,4 @@ vMBMLogRTUFrame( eMBPortLogLevel eLevel, xMBMInternalHandle * pxIntHdl, char *sz
 }
 #endif
 #endif
-#endif
+

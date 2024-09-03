@@ -7,7 +7,6 @@
  */
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #include <stdio.h>
@@ -136,4 +135,4 @@ eMBMCustom1Polled( xMBMHandle xHdl, UCHAR ucSlaveAddress, UBYTE ubLength, UBYTE 
     while( eState != MBM_STATE_DONE );
     return eStatus;
 }
-#endif
+

@@ -6,7 +6,6 @@
  * $Id: mbmcrc.c,v 1.9 2009-01-03 11:29:22 cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 
 /* ----------------------- Platform includes --------------------------------*/
@@ -156,4 +155,4 @@ usMBMCRC16( const UBYTE * pucFrame, USHORT usLen )
      */
     return ( USHORT )( ( USHORT )ubCRCHi << 8 | ( USHORT )ubCRCLo );
 }
-#endif
+

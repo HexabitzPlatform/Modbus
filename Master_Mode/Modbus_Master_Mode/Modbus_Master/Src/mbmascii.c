@@ -6,7 +6,6 @@
  * $Id: mbmascii.c,v 1.36 2013-05-21 21:04:08 embedded-solutions.cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #include <string.h>
@@ -1253,4 +1252,4 @@ vMBMLogASCIIFrame( eMBPortLogLevel eLevel, xMBMInternalHandle * pxIntHdl, char *
 
 #endif
 #endif
-#endif
+

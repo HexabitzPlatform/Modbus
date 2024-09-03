@@ -9,7 +9,6 @@
 #ifndef _MBM_ASCII_H
 #define _MBM_ASCII_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #if MBM_ASCII_ENABLED == 1
 
 #ifdef __cplusplus
@@ -59,4 +58,4 @@ PR_END_EXTERN_C
 
 #endif
 #endif
-#endif
+

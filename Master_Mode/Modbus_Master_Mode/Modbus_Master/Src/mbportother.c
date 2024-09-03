@@ -8,7 +8,6 @@
  * $Id: mbportother.c,v 1.1 2008-12-14 19:33:32 cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 #include <H1DR1_Master.h>
 #include <stdlib.h>
@@ -77,5 +76,5 @@ bMBPIsWithinException( void )
     }
     return bIsWithinException;
 }
-#endif
+
 /************************ (C) MODIFIED BY HEXABITZ *****END OF FILE****/

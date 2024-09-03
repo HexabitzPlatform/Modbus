@@ -34,22 +34,12 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
+#include "H1DR1_Master.h"
+#include "eeprom.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-#define MODBUS_MASTER  1
-#define MODBUS_SLAVE   2
-#define Modbus_Mode MODBUS_MASTER
-//#define Modbus_Mode MODBUS_SLAVE
-
-#if(Modbus_Mode==MODBUS_MASTER)
-#define Modbus_Mode MODBUS_MASTER
-#endif
-
-#if(Modbus_Mode==MODBUS_SLAVE)
-#define Modbus_Mode MODBUS_SLAVE
-#endif
 
 /* USER CODE END ET */
 

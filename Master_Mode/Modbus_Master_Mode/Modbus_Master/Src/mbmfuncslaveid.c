@@ -6,7 +6,7 @@
  * $Id: mbmfuncslaveid.c,v 1.1 2010-04-29 21:20:45 embedded-so.embedded-solutions.1 Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #if defined( __18CXX )
@@ -153,4 +153,4 @@ eMBMReportSlaveID( xMBHandle xHdl, UCHAR ucSlaveAddress, UBYTE arubBufferOut[], 
     return eStatus;
 }
 #endif
-#endif
+

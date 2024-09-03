@@ -9,7 +9,6 @@
 #ifndef _MBM_UDP_H
 #define _MBM_UDP_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -42,4 +41,4 @@ eMBErrorCode eMBMUDPFrameSetClient( xMBMInternalHandle * pxIntHdl, const CHAR * 
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

@@ -15,7 +15,7 @@
 			
 */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* Includes ------------------------------------------------------------------*/
 #include <H1DR1_Master.h>
 #include "task.h"
@@ -608,5 +608,5 @@ void SetRTC(uint8_t hour, uint8_t min, uint8_t sec)
 	Minute = min;
 	Second = sec;
 }
-#endif
+
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/

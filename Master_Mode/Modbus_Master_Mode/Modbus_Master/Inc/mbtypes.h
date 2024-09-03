@@ -9,7 +9,6 @@
 #ifndef _MB_TYPES_H
 #define _MB_TYPES_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -225,4 +224,4 @@ typedef void    ( *pvMBAnalyzerCallbackCB ) ( xMBHandle xHdl, void *pxCtx,
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

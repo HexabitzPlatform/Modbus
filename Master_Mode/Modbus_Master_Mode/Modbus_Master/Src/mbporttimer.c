@@ -8,7 +8,6 @@
  * $Id: mbporttimer.c,v 1.2 2009-01-01 23:37:55 cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- System includes ----------------------------------*/
 #include <H1DR1_Master.h>
 #include <stdlib.h>
@@ -249,5 +248,5 @@ static void HandleTimer(TimerHandle_t xTimer)
 //				CLEAR_BIT((&htim16)->Instance->SR, TIM_IT_UPDATE);
 //
 //}
-#endif
+
 /************************ (C) MODIFIED BY HEXABITZ *****END OF FILE****/

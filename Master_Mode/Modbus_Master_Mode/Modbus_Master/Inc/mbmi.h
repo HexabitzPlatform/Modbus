@@ -11,7 +11,6 @@
 #ifndef _MBM_INTERNAL_H
 #define _MBM_INTERNAL_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -130,4 +129,4 @@ void            vMBMMasterTransactionPolled( xMBMInternalHandle * pxIntHdl, UCHA
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

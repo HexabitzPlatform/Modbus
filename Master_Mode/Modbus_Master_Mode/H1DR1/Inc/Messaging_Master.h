@@ -4,7 +4,6 @@
 #define _MESSAGING_MASTER_H
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #include "Modbus_Master_Mode.h"
 #include "H1DR1_Master.h"
 /* -----------------------------------------------------------------------
@@ -44,4 +43,4 @@ Module_Status Module_MessagingProcessing(uint16_t code,  uint8_t *pData);
  void CheckTheFlag() ;
 
 #endif
-#endif
+

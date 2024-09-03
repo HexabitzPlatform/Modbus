@@ -7,7 +7,7 @@
  */
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #include <string.h>
@@ -156,4 +156,4 @@ eMBMReadWriteRAWPDU( xMBMHandle xHdl, UCHAR ucSlaveAddress, UCHAR ucFunctionCode
 }
 
 #endif
-#endif
+

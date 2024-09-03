@@ -26,23 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 #include "main.h"
-
-#if (Modbus_Mode==MODBUS_SLAVE)
-
-#include "Modbus_Slave_Mode.h"
-
-#endif
-
-#if (Modbus_Mode==MODBUS_MASTER)
-
-#include "Modbus_Master_Mode.h"
-
-#endif
-
-
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,11 +88,10 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-#if (Modbus_Mode==1 || Modbus_Mode==MODBUS_SLAVE)
   Module_Init();
 
   EE_Init();
-#endif
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -135,41 +118,26 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
-//uint16_t  d[20]={1,2,3,3,4,56,7};
+
 void StartDefaultTask(void const * argument)
 {
-#if (Modbus_Mode==MODBUS_MASTER)
-		eStatus=SetupModbusRTU(BAUD_RATE, MB_PAR_NONE);
+		SetupModbusRTU(BAUD_RATE, MB_PAR_NONE);
 		SetTimeOut(200);
-#endif
-
-
-#if (Modbus_Mode==MODBUS_SLAVE)
-	eMBSSerialInit(&xModmus,MB_RTU,SLAVE_ADDRESS,PORT,BAUD_RATE,MB_PAR_NONE);
-	ModbusSlaveModeInit();
-#endif
 
 		/* Infinite loop */
   for(;;)
   {
 
-#if (Modbus_Mode==MODBUS_MASTER)
+
 		MasterLoop();
 		//	WriteModbusRegister(1,0,aa);
-	WriteModbusMultiRegisters(1, 0, 6,ff);
-//	ReadModbusRegister(1, 0,6, ee);
+//	WriteModbusMultiRegisters(1, 0, 6,ff);
+	ReadModbusRegister(1, 0,6, ee);
 
 		HAL_Delay(200);
 
 		_IND_TOGGLE();
 
-#endif
-
-#if (Modbus_Mode==MODBUS_SLAVE)
-	  SlaveLoop() ;
-//		HAL_Delay(1000);
-//			_IND_TOGGLE();
-#endif
 
 	}
   /* USER CODE END StartDefaultTask */

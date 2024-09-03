@@ -13,7 +13,7 @@
 
 #include "main.h"
 
-#if (Modbus_Mode==MODBUS_MASTER)
+
 
 #include "main.h"
 #include <assert.h>
@@ -91,9 +91,8 @@ void              vMBPAssert( void );
 
 #endif
 
-#if (Modbus_Mode==MODBUS_SLAVE)
+
 #include <assert.h>
-#include "H1DR1_Slave.h"
 
 #include "stm32f0xx_hal.h"  /* STM32 FW library */
 #include "main.h"
@@ -101,7 +100,7 @@ void              vMBPAssert( void );
 #ifdef _cplusplus
 extern          "C"
 {
-#endif
+
 
 /* ----------------------- Defines ------------------------------------------*/
 
@@ -168,5 +167,4 @@ void                vMBPSetDebugPin( eMBPDebugPin ePinName, BOOL bTurnOn );
 }
 #endif
 
-#endif
 #endif

@@ -7,7 +7,7 @@
  */
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #if defined( __18CXX )
@@ -190,4 +190,4 @@ eMBMReadDiscreteInputs( xMBMHandle xHdl, UCHAR ucSlaveAddress, USHORT usInputSta
     return eStatus;
 }
 #endif
-#endif
+

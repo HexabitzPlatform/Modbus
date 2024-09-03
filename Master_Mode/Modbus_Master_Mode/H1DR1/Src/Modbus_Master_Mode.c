@@ -1,6 +1,4 @@
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
-
 #include "Modbus_Master_Mode.h"
 #include "Messaging_Master.h"
 uint16_t LastRegAdd=0;
@@ -81,4 +79,4 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             the HAL_UART_RxCpltCallback can be implemented in the user file.
    */
 }
-#endif
+

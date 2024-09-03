@@ -10,7 +10,6 @@
 #ifndef _MBM_H
 #define _MBM_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -990,4 +989,4 @@ _DLLEXP eMBErrorCode eMBMUDPSetSlave( xMBMHandle xHdl, const CHAR * pcUDPClientA
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

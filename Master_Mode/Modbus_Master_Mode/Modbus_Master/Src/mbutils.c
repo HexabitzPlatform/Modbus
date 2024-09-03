@@ -6,7 +6,7 @@
  * $Id: mbutils.c,v 1.2 2008-03-06 22:01:48 cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include "mbport.h"
 
@@ -323,4 +323,3 @@ eMBExceptionToErrorcode( UBYTE eMBPDUException )
     }
     return eStatus;
 }
-#endif

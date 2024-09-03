@@ -10,7 +10,6 @@
 #ifndef _MB_PORT_LAYER_H
 #define _MB_PORT_LAYER_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
 #endif
@@ -878,4 +877,4 @@ void            vMBPGetTimeStamp( xMBPTimeStamp * pTimeStamp );
 PR_END_EXTERN_C
 #endif
 #endif
-#endif
+

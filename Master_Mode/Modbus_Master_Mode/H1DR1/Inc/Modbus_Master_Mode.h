@@ -4,8 +4,6 @@
 
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
-
 #include "Messaging_Master.h"
 #include "H1DR1_Master.h"
 
@@ -26,8 +24,8 @@ extern void     prvvMBPUSART1_TC_ISR( void );
 extern void     prvvMBPUSART1_RXNE_ISR( void );
 void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName );
 extern struct rxMessaging_TypeDef rxMessaging;
-void MasterLoop () ;
+
 
 #endif
-#endif
+
 

@@ -9,7 +9,6 @@
 #ifndef _MBM_CONFIG_DEFAULTS_H
 #define _MBM_CONFIG_DEFAULTS_H
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
 /* ----------------------- Defines ------------------------------------------*/
 /*! \addtogroup mbm_cfg
  *  @{
@@ -350,4 +349,4 @@
 
 /*! @} */
 #endif
-#endif
+

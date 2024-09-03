@@ -6,7 +6,7 @@
  * $Id: mbmfuncinput.c,v 1.17 2011-12-04 21:10:57 embedded-solutions.cwalter Exp $
  */
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #if defined( __18CXX )
@@ -186,4 +186,4 @@ eMBMReadInputRegisters( xMBHandle xHdl, UCHAR ucSlaveAddress,
     return eStatus;
 }
 #endif
-#endif
+

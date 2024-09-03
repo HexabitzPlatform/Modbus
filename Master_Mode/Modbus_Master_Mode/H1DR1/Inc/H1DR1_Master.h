@@ -210,23 +210,19 @@ void IND_LED_Init(void);
 
 /* -----------------------------------------------------------------------
 	|																APIs	 	|
-   ----------------------------------------------------------------------- 
-*/
+ -----------------------------------------------------------------------
+ */
 uint8_t GetPort(UART_HandleTypeDef *huart);
 UART_HandleTypeDef* GetUART(uint8_t Port);
 Module_Status SetupModbusRTU(uint32_t BaudRate, uint32_t ParityBit);
 Module_Status SetupModbusASCII(uint32_t BaudRate, uint32_t ParityBit);
-Module_Status ReadModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd, uint8_t NofReg, unsigned short * DataBuffer);
-Module_Status WriteModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd, uint32_t Data);
-Module_Status WriteModbusMultiRegisters(uint8_t SlaveAdd, uint32_t RegAdd, uint8_t NofReg, uint16_t *Data);
+Module_Status ReadModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd,uint8_t NofReg, unsigned short *DataBuffer);
+Module_Status WriteModbusRegister(uint8_t SlaveAdd, uint32_t RegAdd,uint32_t Data);
+Module_Status WriteModbusMultiRegisters(uint8_t SlaveAdd, uint32_t RegAdd,uint8_t NofReg, uint16_t *Data);
 Module_Status SetTimeOut(uint16_t MiliSeconds);
-
 Module_Status ModbuserviceRoutine(uint8_t mbMeterID);
-//Module_Status ModbusHardwareConfiguration(uint8_t *pData);
-//Module_Status SaveConfigsToEEPROM(uint8_t *pData);
-//Module_Status LoadConfigsFromEEPROM(uint8_t *pData);
+void MasterLoop();
 void SetRTC(uint8_t hour, uint8_t min, uint8_t sec);
-
 
 //Module_Status SlaveServiceRoutine(uint8_t SlaveAdd , uint32_t RegAdd , uint8_t NofReg);
 /* -----------------------------------------------------------------------

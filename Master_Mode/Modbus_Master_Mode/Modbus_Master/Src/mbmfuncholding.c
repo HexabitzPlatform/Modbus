@@ -7,7 +7,7 @@
  */
 
 #include "main.h"
-#if (Modbus_Mode==MODBUS_MASTER)
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 #if defined( __18CXX )
@@ -697,4 +697,4 @@ eMBMReadWriteMultipleRegisters( xMBHandle xHdl, UCHAR ucSlaveAddress, USHORT usW
     return eStatus;
 }
 #endif
-#endif
+
