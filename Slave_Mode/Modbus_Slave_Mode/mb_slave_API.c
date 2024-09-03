@@ -28,25 +28,25 @@ eMBErrorCode MbSlaveMode(eMBMode eMode, UCHAR Slave_Address, UCHAR Port,ULONG Ba
 
 	eMBErrorCode eStatus = eMBInit(eMode, Slave_Address, Port, Baud_Rate,Parity);
 	eStatus = eMBEnable();
-
+return eStatus ;
 }
 
-void Write(USHORT *Buffer, uint8_t startAdd, uint8_t endAdd) {
-	int Index = 0;
-	while (startAdd < endAdd) {
+void Write(USHORT *Buffer, uint16_t RegAdd, uint16_t NofReg) {
+	int Index = RegAdd;
+	while (RegAdd < RegAdd+NofReg) {
 		usRegHoldingBuf[Index] = *Buffer++;
-		endAdd--;
+		NofReg--;
 		Index++;
 	}
 
 }
 
 
-void Read (USHORT *Buffer, uint8_t startAdd, uint8_t endAdd) {
-	int Index = 0;
-	while (startAdd < endAdd) {
+void Read (USHORT *Buffer, uint16_t RegAdd, uint16_t NofReg) {
+	int Index = RegAdd;
+	while (RegAdd < RegAdd+NofReg) {
 		*Buffer++ = usRegHoldingBuf[Index];
-		endAdd--;
+		NofReg--;
 		Index++;
 	}
 

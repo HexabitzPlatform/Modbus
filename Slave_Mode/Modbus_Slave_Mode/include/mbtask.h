@@ -18,7 +18,7 @@ PR_BEGIN_EXTERN_C
 /*      NOT USED        */
 
 #define REG_HOLDING_START       1
-#define REG_HOLDING_NREGS       10
+#define REG_HOLDING_NREGS       1024
 
 
 #define REG_COILS_START         1
