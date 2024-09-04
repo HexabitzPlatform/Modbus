@@ -37,14 +37,15 @@
 #include "main.h"
 #include "mbtypes.h"
 #include "mbport.h"
+#include "mb_master_API.h"
 //#include "eeprom.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define RcvMessageMaxSize 256
-#define NumOfPorts 5
-uint8_t RcvMessage[NumOfPorts][RcvMessageMaxSize];
+//#define RcvMessageMaxSize 256
+//#define NumOfPorts 5
+//uint8_t RcvMessage[NumOfPorts][RcvMessageMaxSize];
 
 /* USER CODE END PTD */
 
@@ -54,7 +55,7 @@ uint8_t RcvMessage[NumOfPorts][RcvMessageMaxSize];
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+int d;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -78,51 +79,60 @@ void MX_FREERTOS_Init(void);
  * @brief  The application entry point.
  * @retval int
  */
+uint16_t aa=0x44;
+
+unsigned short ee[12];
 int main(void) {
-	/* USER CODE BEGIN 1 */
+	  /* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
+	  /* USER CODE END 1 */
 
-	/* MCU Configuration--------------------------------------------------------*/
+	  /* MCU Configuration--------------------------------------------------------*/
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+	  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	  HAL_Init();
 
-	/* USER CODE BEGIN Init */
-	/* Peripherals Init */
+	  /* USER CODE BEGIN Init */
+
+	  /* USER CODE END Init */
+
+	  /* Configure the system clock */
+	  SystemClock_Config();
+
+	  /* USER CODE BEGIN SysInit */
+/* Peripherals Init */
 	MX_GPIO_Init();
 	MX_DMA_Init();
 	MX_CRC_Init();
 
-	/* USER CODE END Init */
 	/* Array ports */
 	MX_USART1_UART_Init();
-//		RS485_RECEIVER_EN();
-	HAL_UART_Receive_DMA(&huart1, &RcvMessage[0][0], RcvMessageMaxSize);
-	/* Configure the system clock */
-	SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
-//	Module_Init();
 
-	/* USER CODE END SysInit */
+	/* RS485 port */
 
-	/* Initialize all configured peripherals */
+	RS485_RECEIVER_EN();
 
-	/* USER CODE BEGIN 2 */
+	Modbus_task_Init();
 
-	/* USER CODE END 2 */
 
-	/* Call init function for freertos objects (in freertos.c) */
-	MX_FREERTOS_Init();
+	  /* USER CODE END SysInit */
 
-	/* Start scheduler */
-	osKernelStart();
+	  /* Initialize all configured peripherals */
 
-	/* We should never get here as control is now taken by the scheduler */
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
+	  /* USER CODE BEGIN 2 */
 
+	  /* USER CODE END 2 */
+
+	  /* Call init function for freertos objects (in freertos.c) */
+	  MX_FREERTOS_Init();
+
+	  /* Start scheduler */
+	  osKernelStart();
+
+	  /* We should never get here as control is now taken by the scheduler */
+	  /* Infinite loop */
+	  /* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
 
@@ -133,10 +143,15 @@ int main(void) {
 
 void StartDefaultTask(void const *argument) {
 
-
+	SetupModbusRTU(BAUD_RATE, MB_PAR_NONE);
+	SetTimeOut(200);
 	/* Infinite loop */
 	for (;;) {
-
+		d++;
+		HAL_Delay(200);
+		ReadModbusRegister(1, 0,6, ee);
+//		WriteModbusRegister(1,3,aa);
+//		_IND_TOGGLE();
 	}
 	/* USER CODE END StartDefaultTask */
 }
