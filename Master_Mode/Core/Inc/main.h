@@ -34,6 +34,14 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
+#include "mb_master_API.h"
+#include "cmsis_os.h"
+#include "crc.h"
+#include "dma.h"
+#include "usart.h"
+#include "gpio.h"
+#include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
