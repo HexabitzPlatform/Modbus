@@ -27,10 +27,24 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "main.h"
+
+#include <string.h>
+#include <stdio.h>
+#include "cmsis_os.h"
+#include "mbm.h"
+#include "task.h"
+#include "mbm.h"
+#include "main.h"
+#include "mbtypes.h"
+#include "mbport.h"
+//#include "eeprom.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+#define RcvMessageMaxSize 256
+#define NumOfPorts 5
+uint8_t RcvMessage[NumOfPorts][RcvMessageMaxSize];
 
 /* USER CODE END PTD */
 
@@ -60,7 +74,6 @@ void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
-
 /**
  * @brief  The application entry point.
  * @retval int
@@ -76,16 +89,21 @@ int main(void) {
 	HAL_Init();
 
 	/* USER CODE BEGIN Init */
+	/* Peripherals Init */
+	MX_GPIO_Init();
+	MX_DMA_Init();
+	MX_CRC_Init();
 
 	/* USER CODE END Init */
-
+	/* Array ports */
+	MX_USART1_UART_Init();
+//		RS485_RECEIVER_EN();
+	HAL_UART_Receive_DMA(&huart1, &RcvMessage[0][0], RcvMessageMaxSize);
 	/* Configure the system clock */
 	SystemClock_Config();
 
 	/* USER CODE BEGIN SysInit */
-	Module_Init();
-
-	EE_Init();
+//	Module_Init();
 
 	/* USER CODE END SysInit */
 
@@ -114,8 +132,7 @@ int main(void) {
 }
 
 void StartDefaultTask(void const *argument) {
-	SetupModbusRTU(BAUD_RATE, MB_PAR_NONE);
-	SetTimeOut(200);
+
 
 	/* Infinite loop */
 	for (;;) {

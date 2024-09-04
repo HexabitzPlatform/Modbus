@@ -9,7 +9,7 @@
  */
 #include "main.h"
 /* ----------------------- System includes ----------------------------------*/
-#include <H1DR1_Master.h>
+
 #include <stdlib.h>
 
 /* ----------------------- Platform includes --------------------------------*/
@@ -26,7 +26,7 @@
 #define MAX_TIMER_HDLS                  ( 5 )
 #define IDX_INVALID                     ( 255 )
 #define EV_NONE                         ( 0 )
-
+#define TIMERID_MB_TIMER         0xFF
 #define TIMER_TIMEOUT_INVALID           ( 65535U )
 
 #define RESET_HDL( x ) do { \

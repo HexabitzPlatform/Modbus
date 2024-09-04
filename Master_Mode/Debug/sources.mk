@@ -29,6 +29,5 @@ Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS \
 Middlewares/Third_Party/FreeRTOS/Source \
 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0 \
 Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang \
-Modbus_Master_Mode/H1DR1/Src \
 Modbus_Master_Mode/Modbus_Master/Src \
 

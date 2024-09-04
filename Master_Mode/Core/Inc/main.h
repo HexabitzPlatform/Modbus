@@ -34,8 +34,6 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
-#include "H1DR1_Master.h"
-#include "eeprom.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
