@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -27,11 +27,20 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f0xx_hal.h"
+#include "stm32g0xx_hal.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
 
+#include "cmsis_os.h"
+
+#include "usart.h"
+#include "gpio.h"
+#include <string.h>
+#include <stdio.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stm32f0xx_ll_tim.h"
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

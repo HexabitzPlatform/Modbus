@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (11.3.rel1)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -9,11 +9,13 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Modbus_Slave_Mode/rtu/subdir.mk
--include Modbus_Slave_Mode/port/subdir.mk
--include Modbus_Slave_Mode/functions/subdir.mk
--include Modbus_Slave_Mode/subdir.mk
--include Drivers/STM32F0xx_HAL_Driver/Src/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
+-include M_Mod/Src/subdir.mk
+-include M_Mod/subdir.mk
+-include Drivers/STM32G0xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
@@ -38,34 +40,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Modbus_Slave
+BUILD_ARTIFACT_NAME := Master_Test
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Modbus_Slave.elf \
+Master_Test.elf \
 
 MAP_FILES += \
-Modbus_Slave.map \
+Master_Test.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Modbus_Slave.list \
+Master_Test.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: Modbus_Slave.elf secondary-outputs
+main-build: Master_Test.elf secondary-outputs
 
 # Tool invocations
-Modbus_Slave.elf Modbus_Slave.map: $(OBJS) $(USER_OBJS) F:\HDD\Hexabiz_0.3.0\Modbus_Slave\STM32F091CBUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Modbus_Slave.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"F:\HDD\Hexabiz_0.3.0\Modbus_Slave\STM32F091CBUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Modbus_Slave.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Master_Test.elf Master_Test.map: $(OBJS) $(USER_OBJS) C:\Users\MAHMOOD_REDA\STM32CubeIDE\workspace_1.17.0\Master_Test\STM32G0B1CEUXN_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Master_Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\MAHMOOD_REDA\STM32CubeIDE\workspace_1.17.0\Master_Test\STM32G0B1CEUXN_FLASH.ld" --specs=nosys.specs -Wl,-Map="Master_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -74,14 +76,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Modbus_Slave.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Modbus_Slave.list"
+Master_Test.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Master_Test.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) Modbus_Slave.elf Modbus_Slave.list Modbus_Slave.map default.size.stdout
+	-$(RM) Master_Test.elf Master_Test.list Master_Test.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

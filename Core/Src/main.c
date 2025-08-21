@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -18,15 +18,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "dma.h"
-#include "tim.h"
+#include "cmsis_os.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "mb.h"
-#include "mb_API.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,6 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,15 +50,14 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void ModbusRTUTask() ;
-uint8_t ee[50]={1,2,3,4,5,6};
-int i ;
+
 /* USER CODE END 0 */
 
 /**
@@ -68,6 +66,7 @@ int i ;
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -90,54 +89,57 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_TIM14_Init();
-  MX_USART1_UART_Init();
-  MX_TIM16_Init();
+  MX_USART3_UART_Init();
+	Modbus_task_Init();
   /* USER CODE BEGIN 2 */
-  MX_GPIO_Init();
-  MX_TIM14_Init();
-  MX_DMA_Init();
-  /* DMA1_Channel1_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel1_IRQn, 1);
-  NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-  /* TIM14_IRQn interrupt configuration */
-  NVIC_SetPriority(TIM14_IRQn, 2);
-  NVIC_EnableIRQ(TIM14_IRQn);
-  /* USART1_IRQn interrupt configuration */
-  NVIC_SetPriority(USART1_IRQn, 3);
-  NVIC_EnableIRQ(USART1_IRQn);
-  /* TIM16_IRQn interrupt configuration */
-  NVIC_SetPriority(TIM16_IRQn, 2);
-  NVIC_EnableIRQ(TIM16_IRQn);
-//  HAL_UART_Init(SERIAL_PORT);
-//  MX_USART1_UART_Init();
-  LL_TIM_EnableIT_UPDATE(TIM16);
-  LL_TIM_EnableCounter(TIM16);
-  ModbusRTUTask();
 
-  setZeroReached(0);
-  HAL_Delay(100);
-  setZeroReached(1);
   /* USER CODE END 2 */
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  usRegHoldingBuf[0]=9;
-//	  usRegHoldingBuf[1]=59;
-//	  usRegHoldingBuf[2]=48;
-//	  usRegHoldingBuf[3]=24;
-//	  usRegHoldingBuf[4]=30;
-//	  eMBRegHoldingCB(ee, 1, 6, MB_REG_WRITE);
-	  i++ ;
-//	  HAL_UART_Receive(&huart1, ee, 20, 0xffff);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
+}
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+extern UART_HandleTypeDef huart3;
+uint8_t d=50;
+int yy ;
+uint16_t aa=0x44;
+unsigned short rr[10];
+void StartDefaultTask(void const *argument) {
+	  SetupModbusRTU(9600, 2);
+	    SetTimeOut(200);
+	/* Infinite loop */
+	for (;;) {
+		yy ++;
+//		HAL_UART_Transmit_IT(&huart3, &d, 1);
+//		HAL_UART_Transmit(&huart3, &d, 1,0xffff);
+		HAL_Delay(200);
+//		WriteModbusRegister(1,2,aa);
+		ReadModbusRegister(1, 0, 10, rr);
+//HAL_UART_Transmit(&huart3, &d, 1, 0xffff);
+	}
+	/* USER CODE END StartDefaultTask */
 }
 
 /**
@@ -148,13 +150,18 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+
+  /** Configure the main internal regulator output voltage
+  */
+  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48;
-  RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV1;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -165,17 +172,11 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
-  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK1;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
