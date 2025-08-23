@@ -76,7 +76,7 @@ void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
 BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity)
 {
   /* Performed by CubeMX */
-	MX_USART3_UART_Init();
+	MB_UART_INIT_FN();
 //HAL_UART_Init(SERIAL_PORT);
 SET_BIT(SERIAL_PORT->CR1, USART_CR1_TCIE);
 //  HAL_UART_Enable(SERIAL_PORT);

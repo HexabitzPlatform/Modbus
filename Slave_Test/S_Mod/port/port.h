@@ -76,7 +76,7 @@ typedef int32_t LONG;
 
 #define TIM_TIMEOUT TIM14
 #define SERIAL_PORT USART3
-
+#define MB_UART_INIT_FN()   MX_USART3_UART_Init()
 #endif /* __PORT_H */
 
 /************************ (C) COPYRIGHT 2019 STMicroelectronics *****END OF FILE****/
