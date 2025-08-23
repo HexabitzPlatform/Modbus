@@ -58,3 +58,29 @@
 #endif /* __PORT_H */
 
 #endif /* INC_PORT_H_ */
+
+
+/*
+ * FreeRTOS configuration summary:
+ *
+ * - Preemption enabled (configUSE_PREEMPTION = 1)
+ * - Dynamic allocation enabled, static allocation disabled
+ * - Heap size: 16 KB
+ * - Tick rate: 1 ms (1000 Hz)
+ * - Maximum priorities: 7
+ * - Mutexes enabled
+ * - Software timers enabled (priority = 3, queue length = 4, stack = 256)
+ * - Newlib reentrancy enabled (thread-safe printf/malloc)
+ * - Tick type is atomic (safe TickType_t access)
+ *
+ * Disabled features:
+ * - Idle hook, tick hook
+ * - Static allocation
+ * - Co-routines
+ * - vTaskDelayUntil API
+ *
+ * Note:
+ * - SysTick_Handler is not mapped directly to FreeRTOS,
+ *   xPortSysTickHandler must be called from HAL SysTick_Handler.
+ */
+
