@@ -21,36 +21,15 @@
 #include <stdio.h>
 #include "cmsis_os.h"
 #include "mbm.h"
-
+#include "Port.h"
 /* Exported definitions -------------------------------------------------------*/
-/* Handle for UART1 peripheral */
-extern UART_HandleTypeDef huart1;
-
-/* Handle for CRC peripheral */
-//extern CRC_HandleTypeDef hcrc;
-
-/* Baud rate definition */
-#define BAUD_RATE                   9600
 
 /* Timer IDs for RTC and Timeout */
 #define TIMERID_RTC_TIMER           0xFE
 #define TIMERID_TMOUT_TIMER         0xFD
 
 /* Pointer to RS485 UART handle */
-#define P_RS485uart 	        	&huart3
-
-/* RS485 port definitions */
-#define _P_RS485 		            _P6
-#define P_RS485 	  	         	P6
-#define P_BRIDGING 		          	3
-
-/* RS485 RE/DE pin and port definitions */
-#define	RS485_RE_DE_PIN	         	GPIO_PIN_12
-#define	RS485_RE_DE_PORT         	GPIOA
-
-/* Macros to enable and disable RS485 receiver output */
-#define	RS485_RECEIVER_EN()			HAL_GPIO_WritePin(RS485_RE_DE_PORT, RS485_RE_DE_PIN, GPIO_PIN_RESET)
-#define	RS485_RECEIVER_DIS()		HAL_GPIO_WritePin(RS485_RE_DE_PORT, RS485_RE_DE_PIN, GPIO_PIN_SET)
+#define P_RS485uart 	        	&MB_UART_HANDLE
 
 /* Modbus_Status Type Definition */
 typedef enum
@@ -82,7 +61,7 @@ void Modbus_task_Init(void);
  * @param2: ParityBit - the parity setting (e.g., none, even, odd).
  * @retval: Module_Status - status of the setup process.
  */
-Module_Status SetupModbusRTU(uint32_t BaudRate, uint32_t ParityBit);
+Module_Status SetupModbusRTU();
 
 /*
  * @brief: Sets up the Modbus mode as ASCII.
@@ -90,7 +69,7 @@ Module_Status SetupModbusRTU(uint32_t BaudRate, uint32_t ParityBit);
  * @param2: ParityBit - the parity setting (e.g., none, even, odd).
  * @retval: Module_Status - status of the setup process.
  */
-Module_Status SetupModbusASCII(uint32_t BaudRate, uint32_t ParityBit);
+Module_Status SetupModbusASCII();
 
 /*
  * @brief: Reads data from a slave on Modbus port FC: 0x03.

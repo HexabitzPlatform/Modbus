@@ -54,6 +54,11 @@ extern          "C"
 
 #define MB_UART_1                       1
 #define MB_UART_2                       2
+#define MB_UART_3                       3
+#define MB_UART_4                       4
+#define MB_UART_5                       5
+#define MB_UART_6                       6
+
 
 /* ----------------------- Function prototypes ------------------------------*/
 

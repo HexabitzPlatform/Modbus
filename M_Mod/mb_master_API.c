@@ -27,17 +27,9 @@
 #include "timers.h"
 
 /* Private variables ---------------------------------------------------------*/
-/* Handle for UART1 peripheral */
-extern UART_HandleTypeDef huart3;
-
-/* Handle for CRC peripheral */
-//extern CRC_HandleTypeDef hcrc;
 
 /* Handle for Modbus Master */
 xMBMHandle xMBMaster;
-
-/* Buffer to receive data */
-USHORT DataRcv[200];
 
 /* Flag to trigger Modbus operations */
 uint8_t mbTriggerFlag = 0;
@@ -79,7 +71,7 @@ static void RTC_HandleTimer(TimerHandle_t zTimer);
 static void TMOUT_HandleTimer(TimerHandle_t sTimer);
 
 /* ISR for Modbus protocol port */
-void prvvMBPUSART1_RXNE_ISR(void);
+void prvvMBPUSART_RXNE_ISR(void);
 
 /* -----------------------------------------------------------------------
  |							 Private Functions	 	                      |
@@ -174,7 +166,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	rxMessaging.Flag = 1;
 
 	if (huart == P_RS485uart) {
-		prvvMBPUSART1_RXNE_ISR(); /* Call Modbus protocol port ISR */
+		prvvMBPUSART_RXNE_ISR(); /* Call Modbus protocol port ISR */
 	}
 
 	/* NOTE : This function should not be modified, when the callback is needed,
@@ -195,7 +187,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 void Modbus_task_Init(void) {
 
 	/* RS485 port */
-	RS485_RECEIVER_EN();
+	RS485_TX_ENABLE();
 	/* Definition and creation of software timers */
 	zTimer = xTimerCreate("RTC_Timer", pdMS_TO_TICKS(1), pdTRUE,
 			(void*) TIMERID_RTC_TIMER, RTC_HandleTimer);
@@ -218,10 +210,10 @@ void Modbus_task_Init(void) {
  * @param2: ParityBit - the parity setting (e.g., none, even, odd).
  * @retval: Module_Status - status of the setup process.
  */
-Module_Status SetupModbusRTU(uint32_t BaudRate, uint32_t ParityBit) {
+Module_Status SetupModbusRTU() {
 	Module_Status Status;
-	ULONG Pbit = (ULONG) ParityBit;
-	ULONG ulBaudRate = (ULONG) BaudRate;
+	ULONG Pbit = 0;
+	ULONG ulBaudRate = 9600;
 //	HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
 //	HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
 	/* Initialize Modbus port as RTU */
@@ -242,10 +234,10 @@ Module_Status SetupModbusRTU(uint32_t BaudRate, uint32_t ParityBit) {
  * @param2: ParityBit - the parity setting (e.g., none, even, odd).
  * @retval: Module_Status - status of the setup process.
  */
-Module_Status SetupModbusASCII(uint32_t BaudRate, uint32_t ParityBit) {
+Module_Status SetupModbusASCII() {
 	Module_Status Status;
-	ULONG Pbit = (ULONG) ParityBit;
-	ULONG ulBaudRate = (ULONG) BaudRate;
+	ULONG Pbit = 0;
+	ULONG ulBaudRate = 9600;
 //	HAL_NVIC_DisableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
 //	HAL_NVIC_DisableIRQ(DMA1_Ch4_7_DMA2_Ch3_5_IRQn);
 	/* Initialize Modbus port as ASCII */
